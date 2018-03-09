@@ -24,6 +24,7 @@ while len(hrefs) < 500:
         except NoSuchElementException:
             print 'No Company Link'
             continue
+    wait_for_xpath(driver, '//*[@id="resultsCol"]/div[13]/a')
     page_links = driver.find_elements_by_xpath('//*[@id="resultsCol"]/div[13]/a')
     next_button = page_links[-1]
     driver.get(next_button.get_attribute('href'))

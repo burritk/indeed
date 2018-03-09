@@ -28,6 +28,7 @@ while len(hrefs) < 500:
             continue
     # wait_for_xpath(driver, '//*[@id="resultsCol"]/div[13]/a')
     page_links = driver.find_elements_by_xpath('//*[@id="resultsCol"]/div[13]/a')
+    print len(page_links)
     next_button = page_links[-1]
     driver.get(next_button.get_attribute('href'))
 

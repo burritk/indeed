@@ -20,7 +20,7 @@ while len(hrefs) < 353:
             if company in hrefs:
                 continue
             hrefs.append(company)
-            print company
+            print len(hrefs), company
         except NoSuchElementException:
             # print 'No Company Link'
             continue

@@ -1,5 +1,4 @@
 import traceback
-import time
 from openpyxl import Workbook
 from openpyxl.utils import get_column_letter
 from selenium.common.exceptions import NoSuchElementException
@@ -7,16 +6,14 @@ from selenium.common.exceptions import NoSuchElementException
 from pyscraper.selenium_utils import get_headed_driver, wait_for_xpath, get_headless_driver
 
 driver = get_headless_driver(no_sandbox=True)
-driver.get('https://www.indeed.com/jobs?q=&l=California')
+driver.get('https://www.indeed.com/q-Full-Time-l-California-jobs.html')
 
 # listings = driver.find_elements_by_class_name('row result clickcard')
 
 hrefs = []
 while len(hrefs) < 353:
-    # time.sleep(2)
     listings = driver.find_elements_by_xpath('//div[@class="row result clickcard"]')
     for listing in listings:
-        # print '.',
         # company = listing.find_element_by_class_name('company').find_element_by_tag_name('a').get_attribute('href')
         try:
             company = listing.find_element_by_xpath('./span[1]/a').get_attribute('href')
@@ -27,14 +24,9 @@ while len(hrefs) < 353:
         except NoSuchElementException:
             # print 'No Company Link'
             continue
-    # wait_for_xpath(driver, '//*[@id="resultsCol"]/div[13]/a')
     page_links = driver.find_element_by_class_name('pagination').find_elements_by_tag_name('a')
     # page_links = driver.find_elements_by_xpath('//*[@id="resultsCol"]/div[13]/a')
     next_button = page_links[-1]
-    print len(hrefs)
-    if len(hrefs) > 349:
-        driver.get('https://www.indeed.com/jobs?q=&l=Florida')
-        continue
     driver.get(next_button.get_attribute('href'))
 
 wb = Workbook()
@@ -63,17 +55,17 @@ for href in hrefs:
     company_name = driver.find_element_by_xpath('//*[@id="cmp-name-and-rating"]/div[1]').text
     company_rating = driver.find_element_by_xpath('//*[@id="cmp-header-rating"]/span').text
 
-    company_info = driver.find_element_by_xpath('//*[@id="cmp-company-details-sidebar"]')
-    info_lines = company_info.find_elements_by_xpath('./*')
-
     company_hq = ''
     company_employees = ''
     company_industry = ''
     company_links = ''
-    for index, line in enumerate(info_lines):
-        if 'Headquarters' in line.text:
-            company_hq = info_lines[index+1].text
-            continue
+    try:
+        company_info = driver.find_element_by_xpath('//*[@id="cmp-company-details-sidebar"]')
+        info_lines = company_info.find_elements_by_xpath('./*')
+        for index, line in enumerate(info_lines):
+            if 'Headquarters' in line.text:
+                company_hq = info_lines[index+1].text
+                continue
         if 'Employees' in line.text:
             company_employees = info_lines[index+1].text
             continue
@@ -83,6 +75,8 @@ for href in hrefs:
         if 'Links' in line.text:
             for link in info_lines[index+1].find_elements_by_tag_name('a'):
                 company_links += link.text + '(' + link.get_attribute('href') + ')\n'
+    except:
+        pass
 
     company_jobs = []
     jobs = driver.find_element_by_xpath('//*[@id="cmp-jobs-container"]')

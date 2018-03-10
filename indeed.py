@@ -27,10 +27,9 @@ while len(hrefs) < 353:
     try:
         last_item = driver.find_element_by_xpath('//div[@class="lastRow row result clickcard"]')
         company = last_item.find_element_by_xpath('./span[1]/a').get_attribute('href')
-        if company in hrefs:
-            continue
-        hrefs.append(company)
-        print company
+        if company not in hrefs:
+            hrefs.append(company)
+            print company
     except NoSuchElementException:
         pass
     page_links = driver.find_element_by_class_name('pagination').find_elements_by_tag_name('a')

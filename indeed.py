@@ -7,7 +7,7 @@ from selenium.common.exceptions import NoSuchElementException
 from pyscraper.selenium_utils import get_headed_driver, wait_for_xpath, get_headless_driver
 
 driver = get_headless_driver(no_sandbox=True)
-driver.get('https://www.indeed.com/q-Full-Time-l-California-jobs.html')
+driver.get('https://www.indeed.com/jobs?q=&l=California')
 
 # listings = driver.find_elements_by_class_name('row result clickcard')
 
@@ -122,7 +122,7 @@ for href in hrefs:
     # company_job_number = driver.find_element_by_xpath('//*[@id="cmp-jobs"]/div[2]/span').text
     data = [company_name,
                company_rating,
-               href,
+               href.encode('utf-8'),
                company_about,
                company_employees,
                company_hq,

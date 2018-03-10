@@ -13,16 +13,17 @@ driver.get('https://www.indeed.com/q-Full-Time-l-California-jobs.html')
 
 hrefs = []
 while len(hrefs) < 500:
-    time.sleep(2)
+    # time.sleep(2)
     listings = driver.find_elements_by_xpath('//div[@class="row result clickcard"]')
     for listing in listings:
-        print '.',
+        # print '.',
         # company = listing.find_element_by_class_name('company').find_element_by_tag_name('a').get_attribute('href')
         try:
             company = listing.find_element_by_xpath('./span[1]/a').get_attribute('href')
             if company in hrefs:
                 continue
             hrefs.append(company)
+            print company
         except NoSuchElementException:
             print 'No Company Link'
             continue

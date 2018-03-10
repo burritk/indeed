@@ -2,6 +2,7 @@ import traceback
 from openpyxl import Workbook
 from openpyxl.utils import get_column_letter
 from selenium.common.exceptions import NoSuchElementException
+import sys
 
 from pyscraper.selenium_utils import get_headed_driver, wait_for_xpath, get_headless_driver
 
@@ -11,7 +12,7 @@ driver.get('https://www.indeed.com/q-Full-Time-l-California-jobs.html')
 # listings = driver.find_elements_by_class_name('row result clickcard')
 
 hrefs = []
-while len(hrefs) < 353:
+while len(hrefs) < sys.argv[1]:
     listings = driver.find_elements_by_xpath('//div[@class="row result clickcard"]')
     for listing in listings:
         # company = listing.find_element_by_class_name('company').find_element_by_tag_name('a').get_attribute('href')

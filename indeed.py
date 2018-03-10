@@ -91,18 +91,21 @@ for href in hrefs:
                 company_links += link.text + '(' + link.get_attribute('href') + ')\n'
     except:
         pass
-
-    company_jobs = []
-    jobs = driver.find_element_by_xpath('//*[@id="cmp-jobs-container"]')
-    for ul in jobs.find_elements_by_xpath('./ul'):
-        for li in ul.find_elements_by_xpath('./li'):
-            company_jobs.append(li.text)
+    
+    try:
+        company_jobs = []
+        jobs = driver.find_element_by_xpath('//*[@id="cmp-jobs-container"]')
+        for ul in jobs.find_elements_by_xpath('./ul'):
+            for li in ul.find_elements_by_xpath('./li'):
+                company_jobs.append(li.text)
+    except:
+        continue
 
     company_jobs_location = '\n'.join(company_jobs)
     total_jobs = driver.find_element_by_xpath('//*[@id="cmp-jobs"]/div[2]/a').text
     company_total_jobs = filter(lambda x: x.isdigit(), total_jobs)
     try:
-        company_about = driver.find_element_by_xpath('//*[@id="cmp-short-description"]').text
+        company_about = driverfind_element_by_xpath('//*[@id="cmp-short-description"]').text
     except:
         company_about = ''
 

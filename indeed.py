@@ -51,6 +51,7 @@ for index, header in enumerate(headers):
 row += 1
 
 for href in hrefs:
+    print row
     driver.get(href)
     company_name = driver.find_element_by_xpath('//*[@id="cmp-name-and-rating"]/div[1]').text
     company_rating = driver.find_element_by_xpath('//*[@id="cmp-header-rating"]/span').text

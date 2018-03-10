@@ -32,7 +32,7 @@ while len(hrefs) < 500:
     # page_links = driver.find_elements_by_xpath('//*[@id="resultsCol"]/div[13]/a')
     next_button = page_links[-1]
     print len(hrefs)
-    if len(hrefs) == 364:
+    if len(hrefs) == 354:
         driver.get('https://www.indeed.com/jobs?q=&l=Nevada')
     driver.get(next_button.get_attribute('href'))
 

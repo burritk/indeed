@@ -105,7 +105,7 @@ for href in hrefs:
     total_jobs = driver.find_element_by_xpath('//*[@id="cmp-jobs"]/div[2]/a').text
     company_total_jobs = filter(lambda x: x.isdigit(), total_jobs)
     try:
-        company_about = driverfind_element_by_xpath('//*[@id="cmp-short-description"]').text
+        company_about = driver.find_element_by_xpath('//*[@id="cmp-short-description"]').text
     except:
         company_about = ''
 

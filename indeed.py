@@ -25,7 +25,7 @@ while len(hrefs) < 353:
             # print 'No Company Link'
             continue
     try:
-        last_item = driver.find_elements_by_xpath('//div[@class="lastRow row clickcard"]')
+        last_item = driver.find_element_by_xpath('//div[@class="lastRow row clickcard"]')
         company = last_item.find_element_by_xpath('./span[1]/a').get_attribute('href')
         if company in hrefs:
             continue

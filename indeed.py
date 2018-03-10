@@ -81,15 +81,15 @@ for href in hrefs:
                 if 'Headquarters' in line.text:
                     company_hq = info_lines[index+1].text
                     continue
-            if 'Employees' in line.text:
-                company_employees = info_lines[index+1].text
-                continue
-            if 'Industry' in line.text:
-                company_industry = info_lines[index+1].text
-                continue
-            if 'Links' in line.text:
-                for link in info_lines[index+1].find_elements_by_tag_name('a'):
-                    company_links += link.text + '(' + link.get_attribute('href') + ')\n'
+                if 'Employees' in line.text:
+                    company_employees = info_lines[index+1].text
+                    continue
+                if 'Industry' in line.text:
+                    company_industry = info_lines[index+1].text
+                    continue
+                if 'Links' in line.text:
+                    for link in info_lines[index+1].find_elements_by_tag_name('a'):
+                        company_links += link.text + '(' + link.get_attribute('href') + ')\n'
         except:
             pass
 

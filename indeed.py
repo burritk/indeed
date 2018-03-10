@@ -34,6 +34,7 @@ while len(hrefs) < 500:
     print len(hrefs)
     if len(hrefs) > 349:
         driver.get('https://www.indeed.com/jobs?q=&l=Nevada')
+        continue
     driver.get(next_button.get_attribute('href'))
 
 wb = Workbook()

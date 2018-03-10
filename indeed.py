@@ -32,7 +32,7 @@ while len(hrefs) < 353:
         hrefs.append(company)
         print company
     except NoSuchElementException:
-        continue
+        pass
     page_links = driver.find_element_by_class_name('pagination').find_elements_by_tag_name('a')
     # page_links = driver.find_elements_by_xpath('//*[@id="resultsCol"]/div[13]/a')
     next_button = page_links[-1]

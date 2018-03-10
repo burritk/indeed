@@ -33,7 +33,7 @@ while len(hrefs) < 500:
     next_button = page_links[-1]
     print len(hrefs)
     if len(hrefs) > 349:
-        driver.get('https://www.indeed.com/jobs?q=&l=Nevada')
+        driver.get('https://www.indeed.com/jobs?q=&l=Florida')
         continue
     driver.get(next_button.get_attribute('href'))
 

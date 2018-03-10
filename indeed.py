@@ -11,7 +11,7 @@ driver.get('https://www.indeed.com/q-Full-Time-l-California-jobs.html')
 # listings = driver.find_elements_by_class_name('row result clickcard')
 
 hrefs = []
-while len(hrefs) < 353:
+while len(hrefs) < 500:
     listings = driver.find_elements_by_xpath('//div[@class="row result clickcard"]')
     for listing in listings:
         # company = listing.find_element_by_class_name('company').find_element_by_tag_name('a').get_attribute('href')
@@ -100,7 +100,6 @@ for href in hrefs:
         company_about = driver.find_element_by_xpath('//*[@id="cmp-short-description"]').text
     except:
         company_about = ''
-    print 'h'
 
     jobs_tab = driver.find_element_by_xpath('//*[@id="cmp-menu-container"]/ul/li[5]/a')
     driver.get(jobs_tab.get_attribute('href'))

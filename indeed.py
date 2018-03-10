@@ -12,7 +12,7 @@ driver.get('https://www.indeed.com/jobs?q=&l=California')
 # listings = driver.find_elements_by_class_name('row result clickcard')
 
 hrefs = []
-while len(hrefs) < 500:
+while len(hrefs) < 353:
     # time.sleep(2)
     listings = driver.find_elements_by_xpath('//div[@class="row result clickcard"]')
     for listing in listings:

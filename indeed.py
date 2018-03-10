@@ -12,6 +12,7 @@ driver.get('https://www.indeed.com/q-Full-Time-l-California-jobs.html')
 # listings = driver.find_elements_by_class_name('row result clickcard')
 
 hrefs = []
+print sys.argv[1]
 while len(hrefs) < sys.argv[1]:
     listings = driver.find_elements_by_xpath('//div[@class="row result clickcard"]')
     for listing in listings:
@@ -33,6 +34,9 @@ while len(hrefs) < sys.argv[1]:
             print company
     except NoSuchElementException:
         pass
+    if len(hrefs) >= sys.argv[1]:
+        print 'done'
+        break
     page_links = driver.find_element_by_class_name('pagination').find_elements_by_tag_name('a')
     # page_links = driver.find_elements_by_xpath('//*[@id="resultsCol"]/div[13]/a')
     next_button = page_links[-1]

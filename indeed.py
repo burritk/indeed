@@ -25,12 +25,13 @@ while len(hrefs) < 500:
             hrefs.append(company)
             print company
         except NoSuchElementException:
-            print 'No Company Link'
+            # print 'No Company Link'
             continue
     # wait_for_xpath(driver, '//*[@id="resultsCol"]/div[13]/a')
     page_links = driver.find_element_by_class_name('pagination').find_elements_by_tag_name('a')
     # page_links = driver.find_elements_by_xpath('//*[@id="resultsCol"]/div[13]/a')
     next_button = page_links[-1]
+    print len(hrefs)
     driver.get(next_button.get_attribute('href'))
 
 wb = Workbook()
